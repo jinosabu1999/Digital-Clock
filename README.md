@@ -57,7 +57,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 🌟 Acknowledgments
 
 - Inspired by the timepieces of tomorrow
-- Built with ❤️ by [JINO SABU]
+- Built with ❤️ by JINO SABU.
 
 ---
 
