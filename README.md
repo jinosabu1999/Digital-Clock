@@ -52,7 +52,7 @@ We welcome all chrononauts and time enthusiasts! If you have ideas for improveme
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE](Livb) for more information.
 
 ## 🌟 Acknowledgments
 
