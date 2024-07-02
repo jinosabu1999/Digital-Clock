@@ -19,7 +19,7 @@ Welcome to the future of timekeeping! This sleek, minimalist clock application b
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/futuristic-clock.git
+   git clone https://github.com/jinosabu1999/futuristic-clock.git
    ```
 2. Open `index.html` in your preferred browser.
 3. Witness the future unfold before your eyes!
@@ -57,7 +57,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 🌟 Acknowledgments
 
 - Inspired by the timepieces of tomorrow
-- Built with ❤️ by [Your Name]
+- Built with ❤️ by [JINO SABU]
 
 ---
 
