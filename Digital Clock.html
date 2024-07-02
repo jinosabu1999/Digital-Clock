@@ -1,34 +1,163 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<style>
-#clock {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 60px;
-  text-align: center;
-  color: white;
-  background-color: black;
-  margin: 20px;
-  padding: 20px;
-}
-</style>
-<script>
-function showTime() {
-  var date = new Date();
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();
-  var ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  var time = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-  document.getElementById('clock').innerHTML = time;
-}
-setInterval(showTime, 1000);
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .clock-container {
+            text-align: center;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: pulse 2s infinite alternate;
+            width: 300px;
+        }
+        #clock {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #date {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            height: 30px;
+        }
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .toggle-label {
+            margin: 0 10px;
+            font-size: 0.9rem;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #0ff;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        @keyframes pulse {
+            from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        }
+        @media (max-width: 480px) {
+            .clock-container {
+                padding: 20px;
+                width: 250px;
+            }
+            #clock {
+                font-size: 2rem;
+                height: 50px;
+            }
+            #date {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div id="clock"></div>
+    <div class="clock-container">
+        <div id="clock"></div>
+        <div id="date"></div>
+        <div class="toggle-container">
+            <span class="toggle-label">12h</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="modeToggle" onchange="toggleMode()">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label">24h</span>
+        </div>
+    </div>
+
+    <script>
+        let is24HourMode = false;
+
+        function showTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            if (!is24HourMode) {
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+            }
+            
+            hours = hours.toString().padStart(2, '0');
+            minutes = minutes.toString().padStart(2, '0');
+            seconds = seconds.toString().padStart(2, '0');
+            
+            let timeString = `${hours}:${minutes}:${seconds}`;
+            if (!is24HourMode) {
+                timeString += ` ${ampm}`;
+            }
+            
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        function toggleMode() {
+            is24HourMode = document.getElementById('modeToggle').checked;
+            showTime();
+        }
+
+        setInterval(showTime, 1000);
+        showTime(); // Initial call to display time immediately
+    </script>
 </body>
 </html>
